@@ -20,9 +20,13 @@ More stuff to come (why we have only 24h per day?).
 ## Technical details
 
 Ultra low-budget i3-3220 from 2013 runs it quite decently.
+<br>
 Turn off some planet orbits [or turn them off completely] in markup to improve performance by a big margin.
 
 Written in plain HTML / CSS / JavaScript.
+<br>
 OS: Windows 7 x64 ESU
+<br>
 Editor: VsCodium 1.97
+<br>
 Browser: RedFox 144

@@ -1,7 +1,9 @@
 # Basic dummy stub for the arcade game
 
 Demo version.
+<br>
 Control Dangerous Dave in wacky space riding green glowing blob by means of arrow keys.
+<br>
 More stuff to come (why we have only 24h per day?).
 
 ## Todo plans

@@ -11,9 +11,11 @@ function randomPosition(element) {
 
 function generateStars(count) {
   const container = document.querySelector(".space");
+
   for (let i = 0; i < count; i++) {
-    let type = Math.floor(Math.random() * 3); 
+    let type = Math.floor(Math.random() * 3);
     let newStar;
+
     switch (type) {
       case 0:
         newStar = createStarElement("star");
@@ -24,13 +26,20 @@ function generateStars(count) {
       default:
         newStar = createStarElement("star-middle");
     }
+
     randomPosition(newStar);
     container.appendChild(newStar);
   }
 }
 
+function updateStarPositions() {
+  const stars = document.querySelectorAll(".star, .star-small, .star-middle");
+  stars.forEach((star) => randomPosition(star));
+}
+
 window.onload = () => {
   generateStars(48);
+  setInterval(updateStarPositions, 8000);
 };
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,5 +1,6 @@
 const ball = document.getElementById("ball");
 const dave = document.querySelector(".dave");
+const daveWrapper = document.querySelector(".dave-wrapper");
 
 let positionX = 150;
 let positionY = 150;
@@ -29,11 +30,11 @@ document.addEventListener("keydown", function (event) {
       break;
     case "ArrowUp":
       isUpPressed = true;
-      updateDaveTransformUp();
+      // updateDaveTransformUp();
       break;
     case "ArrowDown":
       isDownPressed = true;
-      updateDaveTransformDown();
+      // updateDaveTransformDown();
       break;
   }
 });
@@ -50,9 +51,11 @@ document.addEventListener("keyup", function (event) {
       break;
     case "ArrowUp":
       isUpPressed = false;
+      // updateDaveTransformDown();
       break;
     case "ArrowDown":
       isDownPressed = false;
+      // updateDaveTransformUp();
       break;
   }
 });
@@ -66,11 +69,15 @@ function updateDaveTransformLeft() {
 }
 
 function updateDaveTransformUp() {
-  dave.classList.add = "up";
+  // dave.style.transform = "translateX(-35px) translateY(-100px)";
+  daveWrapper.classList.remove("down");
+  daveWrapper.classList.add("up");
 }
 
 function updateDaveTransformDown() {
-  dave.classList.add = "down";
+  // dave.style.transform = "translateX(-35px) translateY(-100px)";
+  daveWrapper.classList.remove("up");
+  daveWrapper.classList.add("down");
 }
 
 function updatePosition() {
@@ -108,7 +115,42 @@ function updatePosition() {
 
 requestAnimationFrame(updatePosition); //repeat
 
-// Second version - more realistic, but still discrete
+// draggable Dave
+
+const draggableBox = document.getElementById(".dave-wrapper");
+
+let posX = 0,
+  posY = 0;
+let mouseOffsetX = 0,
+  mouseOffsetY = 0;
+let isDragging = false;
+
+draggableBox.addEventListener("mousedown", startDrag);
+document.addEventListener("mousemove", onMouseMove);
+document.addEventListener("mouseup", stopDrag);
+
+function startDrag(e) {
+  e.preventDefault();
+  isDragging = true;
+  mouseOffsetX = e.clientX - parseInt(draggableBox.offsetLeft);
+  mouseOffsetY = e.clientY - parseInt(draggableBox.offsetTop);
+}
+
+function onMouseMove(e) {
+  if (!isDragging) return;
+
+  posX = e.clientX - mouseOffsetX;
+  posY = e.clientY - mouseOffsetY;
+
+  draggableBox.style.left = `${posX}px`;
+  draggableBox.style.top = `${posY}px`;
+}
+
+function stopDrag() {
+  isDragging = false;
+}
+
+// Second version - more realistic movement of Dave, but still discrete
 
 // const ball = document.getElementById("ball");
 // let positionX = 0;
@@ -178,7 +220,7 @@ requestAnimationFrame(updatePosition); //repeat
 //   ball.style.top = positionY + "px";
 // }
 
-// First version - discrete movement
+// First version - discrete movement of Dave
 
 // const ball = document.getElementById("ball");
 // document.addEventListener("keydown", handleKeyPress);

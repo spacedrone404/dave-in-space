@@ -14,24 +14,18 @@ html {
   right: 0;
   bottom: 0;
   left: 0;
-  /* background-image: url("media/space.jpg"); */
+  background-image: url("media/space.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  will-change: transform; 
-  backface-visibility: hidden;
-  perspective: 1000px;
-  transform-style: preserve-3d; */
-  /* animation: slideBG 20s cubic-bezier(0.3, 0.55, 0.3, 0.8) infinite alternate; */
+  background-size: cover;
 }
 
 .pixelated-img {
   image-rendering: pixelated;
   animation: startBG 1s ease-in-out;
+  width: 100vw;
+  height: 100vh;
 }
 
 @keyframes startBG {
@@ -54,7 +48,7 @@ html {
   }
 }
 
-/* .pixelated-img:before {
+.bg-layer::before {
   content: "";
   position: absolute;
   top: 0;
@@ -65,18 +59,19 @@ html {
   background-image: inherit;
   background-size: cover;
   background-position: center;
-  opacity: 0.9;
-  mix-blend-mode: color-burn;
+  opacity: 0.88;
+  mix-blend-mode: screen;
   pointer-events: none;
-} */
+  animation: slideBG 12s ease-in-out infinite alternate;
+}
 
 @keyframes slideBG {
   0%,
   100% {
-    transform: translate(-4px, -4px);
+    transform: translateX(-2px) translateY(-2px) rotateZ(0deg) scale(1);
   }
   50% {
-    transform: translate(4px, 4px);
+    transform: translateX(2px) translateY(2px) rotateZ(2deg) scale(1.08);
   }
 }
 
@@ -106,6 +101,11 @@ html {
 .orbit-wrapper {
   animation: floatingDave 1s ease-in-out infinite;
 }
+/* .dave-wrapper {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+} */
 
 .orbit-wrapper {
   animation: startBGDave 1s ease-in-out;
@@ -216,6 +216,7 @@ html {
   border: none;
   background-color: #ffffff;
   z-index: 10000;
+  transition: all 20s ease-in-out; /* star movement */
   animation: blink 6s infinite, glowing 6s infinite;
 }
 

@@ -6,6 +6,7 @@ Intended to be used on desktop & laptop.
 <br>
 Control Dangerous Dave in wacky space riding green glowing blob by means of arrow keys.
 <br>
+<br>
 More stuff to come (why we have only 24h per day?).
 
 ## GFX niceties

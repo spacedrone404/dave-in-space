@@ -32,7 +32,7 @@ document.addEventListener("keydown", function (event) {
       lastFacingDirection = -1;
       updateDaveTransformLeft();
       if (!soundPlayed) {
-        playSoundMove("../media/audio/move.mp3");
+        playSoundMove("media/audio/move.mp3");
         soundPlayed = true;
       }
       break;
@@ -41,26 +41,26 @@ document.addEventListener("keydown", function (event) {
       lastFacingDirection = 1;
       updateDaveTransformRight();
       if (!soundPlayed) {
-        playSoundMove("../media/audio/move.mp3");
+        playSoundMove("media/audio/move.mp3");
         soundPlayed = true;
       }
       break;
     case "ArrowUp":
       isUpPressed = true;
       if (!soundPlayed) {
-        playSoundMove("../media/audio/move.mp3");
+        playSoundMove("media/audio/move.mp3");
         soundPlayed = true;
       }
       break;
     case "ArrowDown":
       isDownPressed = true;
       if (!soundPlayed) {
-        playSoundMove("../media/audio/move.mp3");
+        playSoundMove("media/audio/move.mp3");
         soundPlayed = true;
       }
       break;
     case "Space":
-      playSoundBlast("../media/audio/blast.mp3");
+      playSoundBlast("media/audio/blast.mp3");
       shootBullet();
       break;
   }
@@ -173,7 +173,7 @@ renderTrail();
 // laser shoot
 function shootBullet() {
   const bulletImg = new Image();
-  bulletImg.src = "/../media/blast.png";
+  bulletImg.src = "media/blast.png";
   bulletImg.className = "bullet";
 
   let directionX = lastFacingDirection;
@@ -199,7 +199,7 @@ function shootBullet() {
   }, 600);
 
   // blast audio
-  playSoundBlast("../media/audio/blast.mp3");
+  playSoundBlast("media/audio/blast.mp3");
 }
 
 // laser blaster sound

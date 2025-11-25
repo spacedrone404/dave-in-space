@@ -219,14 +219,14 @@ playSoundStartup();
 
 // teleport startup sound
 function playSoundStartup(src) {
-  const audioStartup = new Audio("media/audio/teleport.mp3");
+  const audioStartup = new Audio("./media/audio/teleport.mp3");
   audioStartup.volume = 0.3;
   audioStartup.play();
 }
 
 // backdrop ambience sound
 function playSoundAmbience() {
-  const audioAmbience = new Audio("media/audio/backdrop.mp3");
+  const audioAmbience = new Audio("./media/audio/backdrop.mp3");
   audioAmbience.loop = true;
   audioAmbience.volume = 0.2;
 

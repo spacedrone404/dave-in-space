@@ -34,12 +34,15 @@
       }
       #popup-container {
         position: fixed;
-        bottom: 20%;
+        bottom: 23%;
         left: 0;
         width: 200px;
         height: 120px;
         padding: 10px;
-        background-color: #bc1414;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(188, 20, 20, 0.4);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         opacity: 0;
         transform: scale(0.7);
@@ -58,6 +61,10 @@
       .popup-content p {
         font-family: "BlueTerminal";
         font-size: 17px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
           position: absolute;
           bottom: 230px;
           z-index: 3000000;
@@ -77,6 +84,21 @@
 
       .hidden {
         display: none !important;
+      }
+
+
+
+      @media screen and (max-height: 1600px){
+         #popup-container {
+          bottom: 19%;
+         }
+        
+      }
+      @media screen and (max-height: 1440px){
+         #popup-container {
+          bottom: 21%;
+         }
+        
       }
     </style>
   </head>
@@ -109,7 +131,7 @@
     
     <div class="hidden" id="popup-container"></div>
         <div class="popup-content"><span class="close-btn">×</span>
-            <p>ALLOW AUDIO PERMISSIONS! BROUGHT TO YOU BY <a href="https://trackerninja.codeberg.page" target="_blank">TRACKERNINJA</a></p>
+            <p>ALLOW ALL AUDIO PERMISSIONS! BROUGHT TO YOU BY <a href="https://trackerninja.codeberg.page" target="_blank">TRACKERNINJA</a></p>
         </div>
     </div>
 

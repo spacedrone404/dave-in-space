@@ -8,6 +8,29 @@ html {
   overflow: hidden !important;
 }
 
+@font-face {
+  font-family: "BlueTerminal";
+  src: url("media/fonts/bigblue-terminal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+#popup-container,
+.popup-content p {
+  animation: slideLink 1s ease-in-out;
+}
+
+@keyframes slideLink {
+  from {
+    transform: translateX(-150%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
 .bg-layer {
   position: fixed;
   top: 0;
@@ -94,18 +117,40 @@ html {
 
 .dave {
   transform: translate(-30px, -100px);
-  z-index: 20000000;
+  z-index: 2000000;
+}
+
+.trail-element {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  /* background-color: rgba(6, 235, 97, 0.5); */
+  background-color: var(--color); /* Используем переменную */
+  transition: opacity 0.5s ease-out;
+  position: absolute;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 2100000;
+}
+
+#bullets img {
+  display: block;
+  width: 60px;
+  height: 40px;
+  image-rendering: pixelated;
+  position: absolute;
+  z-index: 2000000 !important;
 }
 
 .dave-wrapper,
 .orbit-wrapper {
   animation: floatingDave 1s ease-in-out infinite;
 }
-/* .dave-wrapper {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-} */
+.dave-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
 
 .orbit-wrapper {
   animation: startBGDave 1s ease-in-out;
@@ -129,33 +174,6 @@ html {
   height: 100%;
   pointer-events: none;
   animation: startBGDave 1s ease-in-out;
-}
-
-.up {
-  animation: upY 1s ease-in-out;
-}
-.down {
-  animation: downY 1s ease-in-out;
-}
-
-@keyframes upY {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(0.8);
-  }
-}
-
-@keyframes downY {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(1.2);
-  }
 }
 
 @keyframes glowingDave {

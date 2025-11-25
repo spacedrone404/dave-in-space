@@ -6,12 +6,94 @@
     <link rel="stylesheet" href="styles.css" />
 
     <title># Dangerous Dave in wacky space</title>
+    <style>
+
+      a {
+        color: #ffffff;
+        position: relative;
+        display: inline-block;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      a:hover {
+        color: rgb(4, 255, 0);
+
+      }
+
+      a::before {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 4px;
+        bottom: -5px;
+        left: 0;
+        background-color: #ff0000;
+        transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      #popup-container {
+        position: fixed;
+        bottom: 22%;
+        left: 0;
+        width: 200px;
+        height: 88px;
+        padding: 10px;
+        background-color: #bc1414;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: scale(0.7);
+        transition: all 0.8s ease-in-out;
+        z-index: 2200000 !important;
+        pointer-events: none;
+        outline: white 4px groove;
+      }
+
+      #popup-container.visible {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      .popup-content p {
+        font-family: "BlueTerminal";
+        font-size: 18px;
+          position: absolute;
+          bottom: 253px;
+          z-index: 3000000;
+          width: 219px;
+          height: 77px;
+          color: white;
+          text-align: center;
+      }
+
+      .close-btn {
+        float: right;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+    </style>
   </head>
 
   <body>
     <div class="space">
       <div class="bg-layer">
         <!-- <img src="media/space.jpg" class="pixelated-img" /> -->
+      </div>
+
+      <div class="dave-wrapper">
+        <div id="ball">
+          <div class="dave">
+            <img src="media/dangerous-dave.png" alt="dave" />
+          </div>
+          <div id="bullets"></div>
+        </div>
       </div>
     </div>
 
@@ -24,16 +106,47 @@
       <div class="orbit4"><span></span></div>
       <div id="orbit5"><span></span></div>
     </div>
-
-    <div class="dave-wrapper">
-      <div id="ball">
-        <div class="dave">
-          <img src="media/dangerous-dave.png" alt="dave" />
+    
+    <div class="hidden" id="popup-container"></div>
+        <div class="popup-content"><span class="close-btn">×</span>
+            <p>ALLOW AUDIO PERMISSIONS! BROUGHT TO YOU BY <a href="https://trackerninja.codeberg.page" target="_blank">TRACKERNINJA</a></p>
         </div>
-      </div>
     </div>
 
-    <script src="scripts/main.js"></script>
+    <script src="scripts/_main.js"></script>
     <script src="scripts/stars.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const popupContainer = document.getElementById("popup-container");
+        const closeBtn = document.querySelector(".close-btn");
+
+        function showPopup() {
+          popupContainer.classList.remove("hidden");
+
+          setTimeout(() => {
+            popupContainer.classList.add("visible");
+          }, 64);
+        }
+
+        function hidePopup() {
+          popupContainer.classList.remove("visible");
+          popupContainer.addEventListener(
+            "transitionend",
+            () => {
+              popupContainer.classList.add("hidden");
+            },
+            { once: true }
+          );
+        }
+
+        closeBtn.addEventListener("click", () => {
+          hidePopup();
+        });
+
+        setTimeout(() => {
+          showPopup();
+        }, 1000);
+      });
+    </script>
   </body>
 </html>

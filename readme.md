@@ -17,15 +17,16 @@ More stuff to come (why we have only 24h per day?).
 
 ## Todo plans
 
-- make Dave draggable by mouse
-- make Dave leave trace while moving
 - scale Dave when he is going up/down to show perspective
-- implement space bar fire
-- add sounds to start, shot and backdrop ambience
+- make Dave draggable by mouse
 - improve performance if it is possible
+- implement mobile version
 
-## Done
+## Done stuff
 
+- add sounds to startup, actions and backdrop ambience
+- make Dave leave trace while moving
+- implement space bar fire
 - make Dave to turn arround to the direction he is heading to
 - random starting location of blinking stars, they also should change their formation upon blinking
 

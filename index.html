@@ -36,8 +36,9 @@
 
     #popup-container {
       position: fixed;
-      bottom: 23%;
-      left: 0;
+      /* bottom: 23%; */
+      left: 10px;
+      bottom: 50px;
       width: 200px;
       height: 120px;
       padding: 10px;
@@ -64,11 +65,11 @@
       font-family: "BlueTerminal";
       font-size: 17px;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      margin-left: 10px;
       flex-direction: column;
-      position: absolute;
-      bottom: 230px;
+      position: relative;
+      left: 0;
+      top: 81vh;
       z-index: 3000000;
       width: 219px;
       color: #ffffff;
@@ -95,6 +96,8 @@
       margin: 1px;
       transition: all 0.8s ease-in-out;
       padding: 0;
+      position: relative;
+      
     }
 
     .close-btn {
@@ -102,10 +105,14 @@
       color: #ff0000;
       font-weight: bold;
       font-size: 20px;
-      position: absolute;
-      top: 10px;
-      left: 206px;
+      position: relative;
+      left: 208px;
+      top: 24px;
+      width: 14px;
       opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       transition: all 4s ease-in-out;
       border: 2px red groove;
     }
@@ -135,7 +142,6 @@
       overflow: hidden !important;
     }
 
-    /* Some media queries to handle correct position of notification, bad practice, because ir is better to use calc() for position purposes, but who cares, if you are responsible for everything and you are constantly in a time shortage situation */
 
     @media (width <=500px) {
 
@@ -190,100 +196,13 @@
       }
     }
 
-    @media (height: 768px) {
-      .orbit-wrapper {
-        margin-left: -350px;
-      }
-
-      .space {
-        overflow: hidden !important;
-      }
-
+@media (height: 1080px) {
       .popup-content {
-        height: 50px;
-      }
+        top: 82vh;
+  }
+  
+}
 
-      .close-btn {
-        top: -20px;
-      }
-    }
-
-    @media (height: 1024px) {
-
-      .orbit-wrapper {
-        margin-left: -420px;
-      }
-
-      .popup-content {
-        height: 155px;
-      }
-
-      .close-btn {
-        top: 26px;
-      }
-    }
-
-    @media (height: 1080px) {
-
-      .orbit-wrapper {
-        margin-left: 200px;
-      }
-
-      .popup-content {
-        height: 175px;
-      }
-
-      .close-btn {
-        top: 34px;
-      }
-
-    }
-
-
-    @media (height: 1440px) {
-
-
-      .orbit-wrapper {
-        margin-left: 515px;
-      }
-
-      .popup-content {
-        height: 350px;
-      }
-
-      .close-btn {
-        top: 128px;
-      }
-    }
-
-    @media (height: 1600px) {
-
-      .orbit-wrapper {
-        margin-left: 615px;
-      }
-
-      .popup-content {
-        height: 430px;
-      }
-
-      .close-btn {
-        top: 168px;
-      }
-    }
-
-    @media (height: 2160px) {
-      .orbit-wrapper {
-        margin-left: 1415px;
-      }
-
-      .popup-content {
-        height: 680px;
-      }
-
-      .close-btn {
-        top: 290px;
-      }
-    }
   </style>
 </head>
 

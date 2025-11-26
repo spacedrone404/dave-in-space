@@ -1,174 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
 
-    <title># Dangerous Dave in wacky space</title>
-    <style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
 
-      a {
-        color: #ffffff;
+  <title># Dangerous Dave in wacky space</title>
+  <style>
+    a {
+      color: #ffffff;
+      position: relative;
+      display: inline-block;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 4px;
+    }
+
+    a:hover {
+      color: #04ff00;
+    }
+
+    a::before {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 4px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff0000;
+      transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    #popup-container {
+      position: fixed;
+      bottom: 23%;
+      left: 0;
+      width: 200px;
+      height: 120px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(30, 214, 10, 0.4);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: scale(0.7);
+      transition: all 0.8s ease-in-out;
+      z-index: 2200000 !important;
+      pointer-events: none;
+      outline: #ffffff 4px groove;
+    }
+
+    #popup-container.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    .popup-content {
+      font-family: "BlueTerminal";
+      font-size: 17px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: absolute;
+      bottom: 230px;
+      z-index: 3000000;
+      width: 219px;
+      color: #ffffff;
+      text-align: center;
+      transition: all 0.8s ease-in-out;
+      opacity: 0;
+    }
+
+    .popup-content.visible {
+      opacity: 1;
+      transition: all 4s ease-in-out;
+      transform: scale(1);
+
+    }
+
+    .popup-content.hidden {
+      opacity: 0;
+      transition: all 4s ease-in-out;
+      transform: scale(0.1);
+
+    }
+
+    .popup-content p {
+      margin: 1px;
+      transition: all 0.8s ease-in-out;
+      padding: 0;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      color: #ff0000;
+      font-weight: bold;
+      font-size: 20px;
+      position: absolute;
+      top: 10px;
+      left: 206px;
+      opacity: 0;
+      transition: all 4s ease-in-out;
+      border: 2px red groove;
+    }
+
+    .close-btn:hover {
+      color: #ffffff;
+      transition: all 0.4s ease-in-out;
+
+    }
+
+    .close-btn.visible {
+      opacity: 1;
+    }
+
+
+
+    .hidden-orbs {
+      display: none !important;
+    }
+
+    /* Used for notification */
+    .hidden {
+      display: none !important;
+    }
+
+    .orbit-wrapper {
+      overflow: hidden !important;
+    }
+
+    /* Some media queries to handle correct position of notification, bad practice, because ir is better to use calc() for position purposes, but who cares, if you are responsible for everything and you are constantly in a time shortage situation */
+
+    @media (width <=500px) {
+
+
+      .space,
+      .dave-wrapper,
+      .orbit-wrapper,
+      .star-moving,
+      .bg-layer {
+        overflow: hidden !important;
+      }
+
+      .dave {
+        transform: translate(-35px, -100px);
+      }
+
+      #ball {
+        transform: translate(25px, 10px);
+      }
+
+      .trail-element {
+        display: none;
+      }
+
+      #mobile-msg {
+        display: flex;
+        border: #ffffff 6px groove;
+        width: 224px;
+        z-index: 4100000 !important;
         position: relative;
-        display: inline-block;
-        transition: all 0.3s ease-in-out;
-        text-decoration: none;
-        text-decoration: underline;
-        text-underline-offset: 4px;
-      }
-      a:hover {
-        color: rgb(4, 255, 0);
-
-      }
-
-      a::before {
-        content: "";
-        position: absolute;
-        width: 0%;
-        height: 4px;
-        bottom: -5px;
+        top: 0;
         left: 0;
-        background-color: #ff0000;
-        transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-      }
-      #popup-container {
-        position: fixed;
-        bottom: 23%;
-        left: 0;
-        width: 200px;
-        height: 120px;
+        font-size: 42px;
+        transform: translateY(34vh);
+        margin: 0 auto;
         padding: 10px;
-        display: flex;
+        color: #ffffff;
+        box-shadow: 1px 0px 24px 5px rgba(12, 247, 94, 0.2);
+        text-shadow: 5px 5px 24px 5px rgba(12, 247, 94, 0.8);
         justify-content: center;
-        align-items: center;
-        background-color: rgba(188, 20, 20, 0.4);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        transform: scale(0.7);
-        transition: all 0.8s ease-in-out;
-        z-index: 2200000 !important;
-        pointer-events: none;
-        outline: white 4px groove;
-      }
-
-      #popup-container.visible {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: auto;
-      }
-
-      .popup-content p {
+        align-content: center;
+        text-align: center;
         font-family: "BlueTerminal";
-        font-size: 17px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-          position: absolute;
-          bottom: 230px;
-          z-index: 3000000;
-          width: 219px;
-          height: 77px;
-          color: white;
-          text-align: center;
+      }
+
+
+
+      #popup-container,
+      .popup-content,
+      .close-btn {
+        display: none;
+      }
+    }
+
+    @media (height: 768px) {
+      .orbit-wrapper {
+        margin-left: -350px;
+      }
+
+      .space {
+        overflow: hidden !important;
+      }
+
+      .popup-content {
+        height: 50px;
       }
 
       .close-btn {
-        float: right;
-        cursor: pointer;
-        color: white;
-        font-weight: bold;
-        font-size: 20px;
+        top: -20px;
+      }
+    }
+
+    @media (height: 1024px) {
+
+      .orbit-wrapper {
+        margin-left: -420px;
       }
 
-      .hidden {
-        display: none !important;
+      .popup-content {
+        height: 155px;
       }
 
-
-
-      @media screen and (max-height: 1600px){
-         #popup-container {
-          bottom: 19%;
-         }
-        
+      .close-btn {
+        top: 26px;
       }
-      @media screen and (max-height: 1440px){
-         #popup-container {
-          bottom: 21%;
-         }
-        
+    }
+
+    @media (height: 1080px) {
+
+      .orbit-wrapper {
+        margin-left: 200px;
       }
-    </style>
-  </head>
 
-  <body>
-    <div class="space">
-      <div class="bg-layer">
-        <!-- <img src="./media/space.jpg" class="pixelated-img" /> -->
-      </div>
+      .popup-content {
+        height: 175px;
+      }
 
-      <div class="dave-wrapper">
-        <div id="ball">
-          <div class="dave">
-            <img src="./media/dangerous-dave.png" alt="dave" />
-          </div>
-          <div id="bullets"></div>
+      .close-btn {
+        top: 34px;
+      }
+
+    }
+
+
+    @media (height: 1440px) {
+
+
+      .orbit-wrapper {
+        margin-left: 515px;
+      }
+
+      .popup-content {
+        height: 350px;
+      }
+
+      .close-btn {
+        top: 128px;
+      }
+    }
+
+    @media (height: 1600px) {
+
+      .orbit-wrapper {
+        margin-left: 615px;
+      }
+
+      .popup-content {
+        height: 430px;
+      }
+
+      .close-btn {
+        top: 168px;
+      }
+    }
+
+    @media (height: 2160px) {
+      .orbit-wrapper {
+        margin-left: 1415px;
+      }
+
+      .popup-content {
+        height: 680px;
+      }
+
+      .close-btn {
+        top: 290px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="space">
+    <div class="bg-layer">
+      <!-- <img src="./media/space.jpg" class="pixelated-img" /> -->
+    </div>
+
+    <div class="dave-wrapper">
+      <div id="ball">
+        <div class="dave">
+          <img src="./media/dangerous-dave.png" alt="dave" />
         </div>
+        <div id="bullets"></div>
       </div>
     </div>
+  </div>
 
-    <div class="star-moving"></div>
+  <div class="star-moving"></div>
 
-    <div class="orbit-wrapper">
-      <div class="orbit1"><span></span></div>
-      <div class="orbit2"><span></span></div>
-      <div class="orbit3"><span></span></div>
-      <div class="orbit4"><span></span></div>
-      <div id="orbit5"><span></span></div>
-    </div>
-    
-    <div class="hidden" id="popup-container"></div>
-        <div class="popup-content"><span class="close-btn">×</span>
-            <p>ALLOW ALL AUDIO PERMISSIONS! BROUGHT TO YOU BY <a href="https://trackerninja.codeberg.page" target="_blank">TRACKERNINJA</a></p>
-        </div>
-    </div>
+  <div id="mobile-msg"> NO MOBILE VERSION AT THIS TIME!</div>
 
-    <script src="./scripts/main.js"></script>
-    <script src="./scripts/stars.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const popupContainer = document.getElementById("popup-container");
-        const closeBtn = document.querySelector(".close-btn");
+  <div class="hidden" id="popup-container"></div>
+  <div class="popup-content hidden"><span class="close-btn hidden">×</span>
+    <p>ALLOW ALL AUDIO PERMISSIONS!</p>
+    <p style="color:#00aaff;">[ARROWS]+[SPACE]</p>
+    <p style="color:#ff0000;">[F8]►ORBS ON/OFF</p>
+    <p style="font-size: 14px;">brought to you by <a href="https://trackerninja.codeberg.page"
+        target="_blank">TRACKERNINJA</a></p>
+  </div>
 
-        function showPopup() {
-          popupContainer.classList.remove("hidden");
+  <div class="orbit-wrapper hidden-orbs">
+    <div class="orbit1"></div>
+    <div class="orbit2"><span></span></div>
+    <div class="orbit3"><span></span></div>
+    <div class="orbit4"><span></span></div>
+    <div id="orbit5"><span></span></div>
+  </div>
 
-          setTimeout(() => {
-            popupContainer.classList.add("visible");
-          }, 64);
-        }
+  </div>
 
-        function hidePopup() {
-          popupContainer.classList.remove("visible");
-          popupContainer.addEventListener(
-            "transitionend",
-            () => {
-              popupContainer.classList.add("hidden");
-            },
-            { once: true }
-          );
-        }
+  <script src="./scripts/main.js"></script>
+  <script src="./scripts/stars.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const popupContainer = document.getElementById("popup-container");
+      const popupContent = document.querySelector(".popup-content");
+      const closeBtn = document.querySelector(".close-btn");
 
-        closeBtn.addEventListener("click", () => {
-          hidePopup();
-        });
+      function showPopup() {
+        popupContainer.classList.remove("hidden");
+        popupContent.classList.remove("hidden");
+        closeBtn.classList.remove("hidden");
 
         setTimeout(() => {
-          showPopup();
-        }, 1000);
+          popupContainer.classList.add("visible");
+          popupContent.classList.add("visible");
+          closeBtn.classList.add("visible");
+        }, 64);
+      }
+
+      function hidePopup() {
+        popupContainer.classList.remove("visible");
+        popupContent.classList.add("hidden");
+        closeBtn.classList.remove("visible");
+        popupContainer.addEventListener(
+          "transitionend",
+          () => {
+            popupContainer.classList.add("hidden");
+            closeBtn.classList.add("hidden");
+          },
+          { once: true }
+        );
+      }
+
+      closeBtn.addEventListener("click", () => {
+        hidePopup();
       });
-    </script>
-  </body>
+
+      setTimeout(() => {
+        showPopup();
+      }, 1000);
+    });
+  </script>
+
+  <!-- Turns off planet orbits (potato improver) -->
+
+  <script>
+    let isHidden = true;
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'F8') {
+        const wrapper = document.querySelector('.orbit-wrapper');
+        if (!isHidden) {
+          wrapper.classList.add('hidden-orbs');
+          isHidden = true;
+        } else {
+          wrapper.classList.remove('hidden-orbs');
+          isHidden = false;
+        }
+      }
+    });
+  </script>
+
+  <!-- Detecting screen resolution -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      let viewportInfoElement = document.createElement('div');
+      viewportInfoElement.style.position = 'fixed';
+      viewportInfoElement.style.bottom = '0';
+      viewportInfoElement.style.left = '90px';
+      viewportInfoElement.style.transform = 'translate(-35%, 0)';
+      viewportInfoElement.style.padding = '6px';
+      viewportInfoElement.style.opacity = '0.94';
+      viewportInfoElement.style.fontFamily = 'BlueTerminal';
+      viewportInfoElement.style.fontSize = '15px';
+      viewportInfoElement.style.color = '#FF0000';
+      viewportInfoElement.style.backgroundColor = '#FFF';
+      viewportInfoElement.style.outline = '2px solid red';
+      viewportInfoElement.style.textAlign = 'center';
+      viewportInfoElement.style.boxShadow = '0 0 5px rgba(0, 0, 0, 0.28)';
+      viewportInfoElement.style.zIndex = '2100000';
+
+      updateViewportInfo();
+
+      window.addEventListener('resize', updateViewportInfo);
+
+      function updateViewportInfo() {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        viewportInfoElement.textContent = `w:${width}px/h:${height}px`;
+      }
+
+      document.body.appendChild(viewportInfoElement);
+    });
+  </script>
+
+</body>
+
 </html>

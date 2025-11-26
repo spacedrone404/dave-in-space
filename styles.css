@@ -17,7 +17,9 @@ html {
 }
 
 #popup-container,
-.popup-content p {
+.popup-content p,
+.popup-content span,
+.close-btn {
   animation: slideLink 1s ease-in-out;
 }
 
@@ -29,6 +31,11 @@ html {
   to {
     transform: translateX(0);
   }
+}
+
+.bg-layer,
+.bg-layer::before {
+  image-rendering: pixelated !important;
 }
 
 .bg-layer {
@@ -141,18 +148,16 @@ html {
   z-index: 2000000 !important;
 }
 
-.dave-wrapper,
-.orbit-wrapper {
-  animation: floatingDave 1s ease-in-out infinite;
-}
 .dave-wrapper {
   position: relative;
   width: 100vw;
   height: 100vh;
+  z-index: 2000000;
+  animation: floatingDave 1s ease-in-out infinite;
 }
 
-.orbit-wrapper {
-  animation: startBGDave 1s ease-in-out;
+#mobile-msg {
+  display: none;
 }
 
 @keyframes floatingDave {
@@ -275,9 +280,14 @@ html {
   }
 }
 
+.orbit-wrapper {
+  overflow: hidden !important;
+  margin-left: 300px;
+}
+
 .orbit1 {
   position: absolute;
-  right: -90px;
+  /* right: -90px; */
   top: 120px;
   width: 88rem;
   height: 88rem;
@@ -296,14 +306,13 @@ span {
   position: relative;
   left: 20%;
   top: 10%;
-  /* transform: translate(-50%, -50%); */
-  transform: translateX(-5%);
+  transform: translate(-50%, -50%);
   font-size: 28px;
 }
 
 .orbit2 {
   position: absolute;
-  right: 50px;
+  right: 308px;
   top: 270px;
   width: 70rem;
   height: 70rem;
@@ -316,7 +325,7 @@ span {
   position: absolute;
   width: 55rem;
   height: 55rem;
-  right: -320px;
+  right: -20px;
   top: -100px;
   animation: rotations3 6s linear infinite;
   outline: 4px rgb(255, 0, 0) dashed;
@@ -328,7 +337,7 @@ span {
   position: absolute;
   width: 38rem;
   height: 38rem;
-  right: -170px;
+  /* right: -170px; */
   top: 10px;
   animation: rotations4 6s linear infinite;
   outline: 4px rgb(225, 255, 0) dashed;
@@ -340,7 +349,7 @@ span {
   position: absolute;
   width: 18rem;
   height: 18rem;
-  right: -200px;
+  /* right: -200px; */
   top: -40px;
   animation: rotations5 6s linear infinite;
   outline: 4px rgb(251, 0, 151) dashed;
@@ -520,7 +529,7 @@ span {
     transform: rotate(360deg);
   }
 }
-
+/* 
 @media screen and (max-width: 1920px) {
   @keyframes rotations1 {
     0% {
@@ -583,4 +592,4 @@ span {
       transform: rotate(360deg);
     }
   }
-}
+} */

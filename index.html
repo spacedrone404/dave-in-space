@@ -36,11 +36,10 @@
 
     #popup-container {
       position: fixed;
-      /* bottom: 23%; */
       left: 10px;
       bottom: 50px;
       width: 200px;
-      height: 120px;
+      height: fit-content;
       padding: 10px;
       display: flex;
       justify-content: center;
@@ -48,7 +47,7 @@
       background-color: rgba(30, 214, 10, 0.4);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       opacity: 0;
-      transform: scale(0.7);
+      transform: scale(0.1);
       transition: all 0.8s ease-in-out;
       z-index: 2200000 !important;
       pointer-events: none;
@@ -61,59 +60,50 @@
       pointer-events: auto;
     }
 
+
     .popup-content {
       font-family: "BlueTerminal";
       font-size: 17px;
       display: flex;
-      margin-left: 10px;
       flex-direction: column;
       position: relative;
-      left: 0;
-      top: 81vh;
-      z-index: 3000000;
       width: 219px;
       color: #ffffff;
       text-align: center;
       transition: all 0.8s ease-in-out;
       opacity: 0;
+      transform: scale(0.1);
     }
+
 
     .popup-content.visible {
       opacity: 1;
-      transition: all 4s ease-in-out;
+      transition: all 1.2s ease-in-out;
       transform: scale(1);
-
     }
 
-    .popup-content.hidden {
-      opacity: 0;
-      transition: all 4s ease-in-out;
-      transform: scale(0.1);
-
-    }
 
     .popup-content p {
       margin: 1px;
       transition: all 0.8s ease-in-out;
       padding: 0;
       position: relative;
-      
     }
 
     .close-btn {
       cursor: pointer;
       color: #ff0000;
       font-weight: bold;
-      font-size: 20px;
-      position: relative;
-      left: 208px;
-      top: 24px;
+      font-size: 18px;
+      position: absolute;
+      top: -4px;
+      transform: translateX(148px);
+      padding-left: 2px;
       width: 14px;
       opacity: 0;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: all 4s ease-in-out;
+      z-index: 1000;
+      transition: all 1s ease-in-out;
       border: 2px red groove;
     }
 
@@ -128,23 +118,147 @@
     }
 
 
-
     .hidden-orbs {
       display: none !important;
+
     }
 
     /* Used for notification */
     .hidden {
       display: none !important;
+
     }
 
     .orbit-wrapper {
       overflow: hidden !important;
+
+
     }
 
 
+    .res-detector {
+      animation: resEmerge 1s ease-in-out;
+
+    }
+
+    @keyframes resEmerge {
+      from {
+        transform: translate(-60px, 100px);
+        opacity: 0;
+        filter: blur(14px);
+      }
+
+      to {
+        transform: translate(-60px, 0);
+        opacity: 0.8;
+        filter: blur(0);
+      }
+
+    }
+
+    .speech-bubble {
+      position: fixed;
+      padding: 10px;
+      width: 224px;
+      overflow-wrap: break-word;
+      font-size: 16px;
+      /* white-space: nowrap; */
+      color: #ffffff;
+      font-family: "BlueTerminal";
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid #01ff77;
+      border-radius: 5px;
+      pointer-events: none;
+      opacity: 0;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .speech-bubble.fade-in {
+      opacity: 1;
+      animation: speechIn 1s ease-in-out;
+
+    }
+
+    .speech-bubble.fade-out {
+      opacity: 0;
+      animation: speechOut 1s ease-in-out;
+    }
+
+    @keyframes speechIn {
+      from {
+        transform: translateY(60px);
+        opacity: 0;
+        filter: blur(14px);
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+        filter: blur(0);
+      }
+
+    }
+
+    @keyframes speechOut {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+        filter: blur(0);
+      }
+
+      to {
+        transform: translateY(-100px);
+        opacity: 0;
+        filter: blur(14px);
+      }
+
+    }
+
+    .version {
+      color: #ffffff;
+      font-weight: 900;
+      font-family: "BlueTerminal";
+      position: relative;
+      outline: 2px rgb(255, 0, 0) ridge;
+      width: 60px;
+      margin-left: 5px;
+      margin-top: 5px;
+      padding: 4px;
+      padding-left: 8px;
+      z-index: 5000000;
+      background-image: repeating-linear-gradient(135deg,
+          #000000,
+          #095c40 6px,
+          transparent 3px,
+          transparent 6px);
+      background-size: 6px 6px;
+      animation: versionEmerge 1s ease-in-out;
+    }
+
+    @keyframes versionEmerge {
+      from {
+        opacity: 0;
+        filter: blur(14px);
+        transfrom: translateY(-50px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transfrom: translateY(0);
+      }
+    }
+
+    /* Media queries for orbiting planets position */
+
     @media (width <=500px) {
 
+      .version {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
 
       .space,
       .dave-wrapper,
@@ -156,6 +270,7 @@
 
       .dave {
         transform: translate(-35px, -100px);
+        z-index: 4000000;
       }
 
       #ball {
@@ -163,17 +278,19 @@
       }
 
       .trail-element {
-        display: none;
+        /* display: none; */
+        transform: translate(23px, 11px);
       }
 
       #mobile-msg {
         display: flex;
         border: #ffffff 6px groove;
         width: 224px;
-        z-index: 4100000 !important;
+        z-index: 410;
         position: relative;
         top: 0;
         left: 0;
+        opacity: 0.8;
         font-size: 42px;
         transform: translateY(34vh);
         margin: 0 auto;
@@ -196,13 +313,53 @@
       }
     }
 
-@media (height: 1080px) {
-      .popup-content {
-        top: 82vh;
-  }
-  
-}
+    @media (height: 768px) {
+      .orbit-wrapper {
+        margin-left: -350px;
+      }
 
+    }
+
+    @media (height: 1024px) {
+
+      .orbit-wrapper {
+        margin-left: -420px;
+      }
+
+    }
+
+    @media (height: 1080px) {
+
+      .orbit-wrapper {
+        margin-left: 200px;
+      }
+
+    }
+
+
+    @media (height: 1440px) {
+
+
+      .orbit-wrapper {
+        margin-left: 515px;
+      }
+
+    }
+
+    @media (height: 1600px) {
+
+      .orbit-wrapper {
+        margin-left: 615px;
+      }
+
+    }
+
+    @media (height: 2160px) {
+      .orbit-wrapper {
+        margin-left: 1415px;
+      }
+
+    }
   </style>
 </head>
 
@@ -224,19 +381,25 @@
 
   <div class="star-moving"></div>
 
-  <div id="mobile-msg"> NO MOBILE VERSION AT THIS TIME!</div>
+  <div id="mobile-msg"> SECOND TOUCH FOR LASER SHOT!
+  </div>
+  <!-- NO MOBILE VERSION AT THIS TIME! -->
 
-  <div class="hidden" id="popup-container"></div>
-  <div class="popup-content hidden"><span class="close-btn hidden">×</span>
-    <p>ALLOW ALL AUDIO PERMISSIONS!</p>
-    <p style="color:#00aaff;">[ARROWS]+[SPACE]</p>
-    <p style="color:#ff0000;">[F8]►ORBS ON/OFF</p>
-    <p style="font-size: 14px;">brought to you by <a href="https://trackerninja.codeberg.page"
-        target="_blank">TRACKERNINJA</a></p>
+  <div id="popup-container" class="hidden">
+    <div class="popup-content">
+      <span class="close-btn hidden" onmouseover="playSoundMove('media/audio/close.mp3');">×</span>
+      <p style="color:#aaff00; font-size: 14px;">4 KICK BUTT AUDIO ALLOW ALL SOUND PERMISSIONS!</p>
+      <p style="color:#00aaff; font-size: 13px;">[ARROWS]+[SPACE]</p>
+      <p style="color:#ff0000; font-size: 13px;">[F8]►ORBS ON/OFF</p>
+      <p style="color:#00ff26; font-size: 13px;">[ENTER]►DUKENUKEM MODE</p>
+      <p style="font-size: 14px;">brought to you by <a href="https://trackerninja.codeberg.page" target="_blank"
+          onclick="playSoundMove('media/audio/arcade-blip.mp3'); return true;"
+          onmouseover="playSoundMove('media/audio/click.mp3');">TRACKERNINJA</a></p>
+    </div>
   </div>
 
   <div class="orbit-wrapper hidden-orbs">
-    <div class="orbit1"></div>
+    <div class="orbit1"><span><!--put text here--></span></div>
     <div class="orbit2"><span></span></div>
     <div class="orbit3"><span></span></div>
     <div class="orbit4"><span></span></div>
@@ -257,35 +420,35 @@
         popupContainer.classList.remove("hidden");
         popupContent.classList.remove("hidden");
         closeBtn.classList.remove("hidden");
+        setTimeout(() => {
+          playSoundMove("media/audio/hover/hover.mp3");
+        }, 500);
 
         setTimeout(() => {
           popupContainer.classList.add("visible");
           popupContent.classList.add("visible");
           closeBtn.classList.add("visible");
-        }, 64);
+        }, 188);
       }
 
       function hidePopup() {
         popupContainer.classList.remove("visible");
-        popupContent.classList.add("hidden");
+        popupContent.classList.add("visible");
         closeBtn.classList.remove("visible");
-        popupContainer.addEventListener(
-          "transitionend",
-          () => {
-            popupContainer.classList.add("hidden");
-            closeBtn.classList.add("hidden");
-          },
-          { once: true }
-        );
+        playSoundMove("media/audio/hover/unhover.mp3");
+
+        popupContainer.addEventListener("transitionend", () => {
+          popupContainer.classList.add("hidden");
+          popupContent.classList.add("hidden");
+          closeBtn.classList.add("hidden");
+        }, { once: true });
       }
 
       closeBtn.addEventListener("click", () => {
         hidePopup();
       });
 
-      setTimeout(() => {
-        showPopup();
-      }, 1000);
+      setTimeout(showPopup, 8000);
     });
   </script>
 
@@ -298,12 +461,25 @@
         const wrapper = document.querySelector('.orbit-wrapper');
         if (!isHidden) {
           wrapper.classList.add('hidden-orbs');
+          playSoundMove("media/audio/power-off.mp3");
           isHidden = true;
         } else {
           wrapper.classList.remove('hidden-orbs');
+          playSoundMove("media/audio/arcade-blip.mp3");
           isHidden = false;
         }
       }
+    });
+  </script>
+
+  <!-- Injecting version number -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      let version = document.createElement('div');
+      version.classList.add('version');
+      version.textContent = "v0.4+";
+      document.body.appendChild(version);
     });
   </script>
 
@@ -311,12 +487,13 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       let viewportInfoElement = document.createElement('div');
+      viewportInfoElement.classList.add('res-detector');
       viewportInfoElement.style.position = 'fixed';
       viewportInfoElement.style.bottom = '0';
       viewportInfoElement.style.left = '90px';
       viewportInfoElement.style.transform = 'translate(-35%, 0)';
       viewportInfoElement.style.padding = '6px';
-      viewportInfoElement.style.opacity = '0.94';
+      viewportInfoElement.style.opacity = '0.8';
       viewportInfoElement.style.fontFamily = 'BlueTerminal';
       viewportInfoElement.style.fontSize = '15px';
       viewportInfoElement.style.color = '#FF0000';
@@ -333,7 +510,7 @@
       function updateViewportInfo() {
         let width = window.innerWidth;
         let height = window.innerHeight;
-        viewportInfoElement.textContent = `w:${width}px/h:${height}px`;
+        viewportInfoElement.textContent = `w:${width}px|h:${height}px`;
       }
 
       document.body.appendChild(viewportInfoElement);
